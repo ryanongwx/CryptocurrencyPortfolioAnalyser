@@ -13,7 +13,7 @@ class Transaction(models.Model):
     transactiontype = models.CharField(max_length=10, verbose_name='Type of Transaction')
     price = models.FloatField(verbose_name="Price Transacted")
     tokenqty = models.FloatField(verbose_name="Quantity Transacted")
-    date = models.DateField(verbose_name="Date of Transaction")
+    date = models.DateField(verbose_name="Date of Transaction (YYYY-MM-DD)")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     totalprice = models.FloatField()
     transactionfee = models.FloatField()

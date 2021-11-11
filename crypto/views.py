@@ -29,10 +29,10 @@ def index(request):
                                       date=date, user=request.user, totalprice=totalprice, transactionfee=transactionfee)
             transaction.save()
             return render(request, 'crypto/index.html', {
-                "transactions": Transaction.objects.filter(user=request.user)})
+                "transactions": Transaction.objects.filter(user=request.user).order_by('-date')})
 
     return render(request, 'crypto/index.html', {
-        "transactions": Transaction.objects.filter(user=request.user)})
+        "transactions": Transaction.objects.filter(user=request.user).order_by('-date')})
 
 def createtransaction(request):
     return render(request, "crypto/createtransaction.html",{
@@ -101,6 +101,9 @@ def custom(request):
         return render(request, "crypto/custom.html")
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("crypto:index"))
+
     if request.method == "POST":
 
         # Attempt to sign user in
@@ -111,7 +114,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("crypto:index"))
+            return HttpResponseRedirect(reverse("crypto:login"))
         else:
             return render(request, "crypto/login.html", {
                 "message": "Invalid username and/or password."
@@ -122,7 +125,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("crypto:login"))
+    return HttpResponseRedirect(reverse("crypto:index"))
 
 def register(request):
     if request.method == "POST":
