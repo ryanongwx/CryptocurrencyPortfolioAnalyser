@@ -8,7 +8,7 @@ from .models import Transaction
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-response = requests.get("https://api.nomics.com/v1/currencies/ticker?key=a4edc8e0bf84324e111593d559850c8c6f29cfac&ids=BTC,ETH,ADA,DOGE&interval=1d,30d&convert=SGD")
+response = requests.get("https://api.nomics.com/v1/currencies/ticker?key=a4edc8e0bf84324e111593d559850c8c6f29cfac&interval=1d,30d&convert=SGD")
 cryptoprices = response.json()
 
 # Create your views here.
@@ -40,57 +40,68 @@ def createtransaction(request):
     })
 
 def coinanalysis(request, coin):
-    boughtfor = 0
-    tokenbought = 0
-    soldfor = 0
-    tokensold = 0
-    totaltransactionfees = 0
-    # GET THE TRANSACTION OF ONLY THE USER OF THE CURRENT SESSION
-    transactions = Transaction.objects.filter(user=request.user)
-    for transaction in transactions:
-        if transaction.coin == coin:
-            totaltransactionfees += transaction.transactionfee
-            if transaction.transactiontype == "Buy":
-                boughtfor += transaction.price * transaction.tokenqty
-                tokenbought += transaction.tokenqty
+    for crypto in cryptoprices:
+        if crypto['id'] == coin:
+            boughtfor = 0
+            tokenbought = 0
+            soldfor = 0
+            tokensold = 0
+            totaltransactionfees = 0
+            # GET THE TRANSACTION OF ONLY THE USER OF THE CURRENT SESSION
+            transactions = Transaction.objects.filter(user=request.user)
+            for transaction in transactions:
+                if transaction.coin == coin:
+                    totaltransactionfees += transaction.transactionfee
+                    if transaction.transactiontype == "Buy":
+                        boughtfor += transaction.price * transaction.tokenqty
+                        tokenbought += transaction.tokenqty
+                    else:
+                        soldfor += transaction.price * transaction.tokenqty
+                        tokensold += transaction.tokenqty
+
+                    for crypto in cryptoprices:
+                        if crypto['id'] == coin:
+                            currentprice = crypto["price"]
+            if tokenbought == 0:
+                message = "You do not own any of this coin"
+                return render(request, 'crypto/coinnotfound.html', {
+                    "message": message
+                })
+            tokenstransacted = tokensold
+            tokensholding = tokenbought - tokensold
+            avgpricebought = boughtfor / tokenbought
+            totalbought = boughtfor
+            if tokensold > 0:
+                avgpricesold = soldfor / tokensold
+                totalsold = soldfor
             else:
-                soldfor += transaction.price * transaction.tokenqty
-                tokensold += transaction.tokenqty
+                avgpricesold = 0
+                totalsold = 0
 
-            for crypto in cryptoprices:
-                if crypto['id'] == coin:
-                    currentprice = crypto["price"]
-    tokenstransacted = tokensold
-    tokensholding = tokenbought - tokensold
-    avgpricebought = boughtfor / tokenbought
-    totalbought = boughtfor
-    if tokensold > 0:
-        avgpricesold = soldfor / tokensold
-        totalsold = soldfor
-    else:
-        avgpricesold = 0
-        totalsold = 0
+            if tokenbought == tokensold:
+                realisedprofit = (avgpricesold - avgpricebought) * tokenbought
+            else:
+                realisedprofit = 0
 
-    if tokenbought == tokensold:
-        realisedprofit = (avgpricesold - avgpricebought) * tokenbought
-    else:
-        realisedprofit = 0
+            tokenvalueifsold = float(tokensholding) * float(currentprice)
+            totalprofitifsoldatcurrentprice = tokenvalueifsold + soldfor - boughtfor - totaltransactionfees
 
-    tokenvalueifsold = float(tokensholding) * float(currentprice)
-    totalprofitifsoldatcurrentprice = tokenvalueifsold + soldfor - boughtfor - totaltransactionfees
-
-    analysis = {'id': coin, "tokenstransacted": tokenstransacted,
-                            "tokensholding": tokensholding,
-                            "avgpricebought": avgpricebought, "avgpricesold": avgpricesold,
-                            "realisedprofit": realisedprofit,
-                            "totalbought": totalbought, "totalsold": totalsold,
-                            "totalprofitifsoldatcurrentprice": totalprofitifsoldatcurrentprice,
-                            "totaltransactionfees": totaltransactionfees}
+            analysis = {'id': coin, "tokenstransacted": tokenstransacted,
+                                    "tokensholding": tokensholding,
+                                    "avgpricebought": avgpricebought, "avgpricesold": avgpricesold,
+                                    "realisedprofit": realisedprofit,
+                                    "totalbought": totalbought, "totalsold": totalsold,
+                                    "totalprofitifsoldatcurrentprice": totalprofitifsoldatcurrentprice,
+                                    "totaltransactionfees": totaltransactionfees}
 
 
-    return render(request, "crypto/analysis.html", {
-        'analysis': analysis,
-        'transactions': Transaction.objects.filter(user=request.user, coin=coin)
+            return render(request, "crypto/analysis.html", {
+                'analysis': analysis,
+                'transactions': Transaction.objects.filter(user=request.user, coin=coin)
+            })
+    message = "This coin does not exist"
+    return render(request, "crypto/coinnotfound.html", {
+        'message': message
     })
 
 def custom(request):
