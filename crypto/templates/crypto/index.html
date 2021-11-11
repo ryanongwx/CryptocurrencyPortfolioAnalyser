@@ -1,0 +1,37 @@
+{% extends 'crypto/layout.html' %}
+
+{% block title %}
+All Transactions
+{% endblock %}
+{% if user.is_authenticated %}
+
+{% block body %}
+{% for transaction in transactions %}
+<h3>{{ transaction.coin }} {{ transaction.transactiontype }} Transaction</h3>
+<div class="transaction">
+    <h3>Transaction ID: {{ transaction.auto_increment_id }}</h3>
+    <ul>
+        <li>
+            Price Transacted: {{ transaction.price }}<br>
+        </li>
+        <li>
+            Quantity of Token Transacted: {{ transaction.tokenqty }}<br>
+        </li>
+        <li>
+            Date Transacted: {{ transaction.date }}<br>
+        </li>
+        <li>
+            Transaction Fee: {{ transaction.transactionfee }}<br>
+        </li>
+    </ul>
+
+    <div class="totalprice">Total Transacted Amount: <span class="dollars">{{ transaction.totalprice }}</span></div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
+{% else %}
+Please Sign in to use Quotation Generator
+{% endif %}

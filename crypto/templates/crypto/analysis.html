@@ -1,0 +1,48 @@
+{% extends 'crypto/layout.html' %}
+{% block body %}
+<h1> Analysis for {{ analysis.id }} transactions</h1>
+<ul>
+    <li>
+        Tokens Currently Held : {{ analysis.tokensholding }}<br>
+    </li>
+    <li>
+        Total Tokens Bought and Sold : {{ analysis.tokenstransacted }}<br>
+    </li>
+    <li>
+        Average Price Bought : {{ analysis.avgpricebought }} <br>
+    </li>
+    <li>
+        Average Price Sold : {{ analysis.avgpricesold }}<br>
+    </li>
+    <li>
+        Total Transaction Fees: {{ analysis.totaltransactionfees }}
+    </li>
+
+</ul>
+<div class="totalprice">Total Profit if Sold at Current Price : {{ analysis.totalprofitifsoldatcurrentprice }}</div>
+{% for transaction in transactions %}
+<h3>{{ transaction.coin }} {{ transaction.transactiontype }} Transaction</h3>
+<div class="transaction">
+    <h3>Transaction ID: {{ transaction.auto_increment_id }}</h3>
+    <ul>
+        <li>
+            Price Transacted: {{ transaction.price }}<br>
+        </li>
+        <li>
+            Quantity of Token Transacted: {{ transaction.tokenqty }}<br>
+        </li>
+        <li>
+            Date Transacted: {{ transaction.date }}<br>
+        </li>
+        <li>
+            Transaction Fee: {{ transaction.transactionfee }}<br>
+        </li>
+    </ul>
+
+    <div class="totalprice">Total Transacted Amount: <span class="dollars">{{ transaction.totalprice }}</span></div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
