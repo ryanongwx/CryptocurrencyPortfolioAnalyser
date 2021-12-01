@@ -1,12 +1,3 @@
 {
-  "type": "service_account",
-  "project_id": "crytocurrency-portfolio",
-  "private_key_id": "f81f45f87bfe5130ab594b762586ac1a61fa01fe",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC032ocvISUiiZ4\nOwzmE83X9k9DkXitII0VcuDlQDXeJALIGwExdl8JuRjP/zWWWgOnaLBz2PNYjful\nuaFoNmSkNaN64pAGdZZiVgaS780+WK9nx423/5WaTX1bUBLCBFb+BZ41oWTFU4KT\nhw25ST9nxN1FoCMv8I2GF7YwKibtsYSmyN1vegcrdhVVOuZunY5NrKLCxry6nqNI\n4RYBLhjZ6ptmPX3XF6Sm50Jfh7PsM6bP6NVZxgO+mNKWuuWBssVfYCu9hfXXfIE7\n9mX0UklWaIg8VNExkuVBsFjQWxnLo6SpQ+0240hOIdmHah7EAF4RdI9gzyYbeg2l\n6bBlX9YnAgMBAAECggEAMuWzrIZ4IHyHusmTJaNpB16ui2sCNGW2jdSX6Ksa/XnQ\ntpKy0UJoGApYKx+76qVF5fQVw2PHhqHdsJL+Ep9LztGxQUFEGi04tk9S5kJI1USL\nh36mKKLpbFRl9C4iOSqTeEQIczsJamXHltAoUn2ENCU3xwH7JOBiUtuVTxRtg/E5\nGv1iwlPH5S7hkrOR7HvKDyjMaOV9YbKo7msjm/1dDAEKAMngbBL2nL9KgKheDQCE\n5ZMXHqN/HAbbhNXcetjv7RrH1vGl3UBXjvHWmkR7uJNQW8YrMVu1/qsGNIHRnVwB\nTHMzeCHeAl1XtzI8zHYrl4wLUo+aygTV8SJ18FQFsQKBgQDfmQqfnuMVw9XZk0xc\nl3b14OfgBNiiszGivBisyS5wwQnZ84FsYr7jkWBCZeUZ9IFdte1qgABZR4yw/elP\ngkw0vVc2xbOLqUeXrRBd7Vf5ah3dPlj/js0bOEhYmXK/DhWCZ0JtiJ07XflTpEQo\nvQ+KeXn1UdPJpdSEOHMYMPrFkwKBgQDPFV79tvUHGhLpJDlEWYAtm8lnL0lhsiNd\n34rjcTtcHpFv/qkPyhYkVv5ATVPiYainPln3sdc+QKkivU641HzR5wsU3wl0/tcz\nsc3+wMdP76L32htfJiIb9ZHMo0r+YqM5bvJeg3kFWw3CNUx+6lTpDuREvDxyLNul\nm27HQGOJnQKBgCzwoYX7dUDGn5CfXlWty6cXkQMhdjkdMvi2PW9c8AyRf91iZ7zV\nC/DJI0O1HxrcXbPsAM/K8kb/bnOUVPQ6B/8BnynPCosjdtQxYHzAW1Ix1dbF1TVo\nCilSYpgMH1fvCLuw7VT+hDuOY7I/7cMSXLFEQRLhY2PABLqebeOK1JwpAoGANjwW\noMQl8DI3+a9vACOgmlFOsiOESH3rHU7KhT7GmR24YWiExonaurG97QFTktqY3RRL\nY7/D653rrhl+YJHmDuM/17uCMo37tqI+nRXIHXtZZyhMOuM107TA9qNdpLoYnZYd\nC/vK2kg6lj53RlYA3vjzd70E57Iv5HOM08pdR1ECgYAYUDiqg4hKkvpxAH3EWmzL\nD4tzjeUKGSJ1mrDrhJNtjyTQluwLYO0nvtxY2QZE9nfDAqOrZ2Vljqc96J1NTbh0\nk5enZ5P3JdKIzhARRr1cAxj3y5Uz/v6ojdOZFnqnCe0KiSYOb15G24Ip33+1IirZ\njdzErale5TQiiqHaSc9CsA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "ryanongwx@crytocurrency-portfolio.iam.gserviceaccount.com",
-  "client_id": "107119248027333646457",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ryanongwx%40crytocurrency-portfolio.iam.gserviceaccount.com"
+  // Insert your own cred.json file here
 }
